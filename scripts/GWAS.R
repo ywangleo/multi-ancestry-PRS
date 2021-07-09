@@ -23,9 +23,10 @@ opt = parse_args(OptionParser(option_list=option_list))
 
 bfile_prefix <- opt$bfile_prefix
 phenodir <- opt$phenodir
+pheno <- opt$pheno
 bin <- opt$bin_number
 n_threads <- opt$n_threads
-binfile <- opt$binfile
+binfile <- opt$summary_bins_file
 out_prefix <- opt$out_prefix
 
 bin_sums <- fread(binfile)
