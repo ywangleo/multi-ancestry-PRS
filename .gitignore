@@ -37,3 +37,12 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+
+##user-defined
+data/
+phenotypes/
+bins/
+gwas/
+scripts/job_reports/
+scripts/qsub.*
