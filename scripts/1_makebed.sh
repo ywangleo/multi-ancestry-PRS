@@ -1,7 +1,7 @@
 
 
 wkdir="/afm01/UQ/Q2909/v3All_impQC"
-outdir="/scratch/90days/uqywan67/data"
+outdir="/scratch/90days/uqywan67/multi-ancestry-PRS/data"
 
 chr=${TASK_ID}
 

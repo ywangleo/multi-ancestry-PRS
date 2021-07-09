@@ -1,9 +1,8 @@
 
 ##randomly split into bins with 5K for different phenotypes
-phenofile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt"
-eurfile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/ukb31063.neale_gwas_covariates.both_sexes_remove_withdrawn_updateIDs.tsv"
-outf="/scratch/90days/uqywan67/multi-acestry-PRS/bins/ukb_eur_ran5k.idlist"
-hold_out="/scratch/90days/uqywan67/multi-acestry-PRS/bins/ukb_eur_ran5k.idlist"
+phenofile="/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt"
+eurfile="/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/ukb31063.neale_gwas_covariates.both_sexes_remove_withdrawn_updateIDs.tsv"
+hold_out="/scratch/90days/uqywan67/multi-ancestry-PRS/bins/ukb_eur_ran5k.idlist"
 
 phenames <- c("height", "bmi", "sbp", "dbp", "wbc", "monocyte", "neutrophil", 
               "eosinophil", "basophil", "lymphocyte", "rbc", "mch", "mcv", 
@@ -43,8 +42,8 @@ for(PHENO in phenames){
   tmp2 <- tmp1[sample(nrow(tmp1), nrow(tmp1))]
   #tmp3 <- tmp2[,c("FID", "IID")]
   split_data_table(x = tmp2, no_rows_per_frame = 5000, 
-                   prefix_to_store = paste0("/scratch/90days/uqywan67/multi-acestry-PRS/bins/", PHENO, "_Bin"))
+                   prefix_to_store = paste0("/scratch/90days/uqywan67/multi-ancestry-PRS/bins/", PHENO, "_Bin"))
 }
 
-fwrite(sums, file = "/scratch/90days/uqywan67/multi-acestry-PRS/bins/pheno_bins_summary.txt", sep = "\t")
+fwrite(sums, file = "/scratch/90days/uqywan67/multi-ancestry-PRS/bins/pheno_bins_summary.txt", sep = "\t")
 
