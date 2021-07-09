@@ -1,4 +1,4 @@
-# multi-acestry-PRS
+# multi-ancestry-PRS
 
 ## 1. Generate plink files using QCd variants
 - maf 0.01, geno 0.05, mind 0.1, hwe 1e-6
