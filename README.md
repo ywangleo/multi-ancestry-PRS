@@ -9,7 +9,7 @@
 
 ## 3. Split the remaining individuals to bins with equal sample size (5K)
 - Excluding the hold-out samples
-- Evenly split the randomly ordered in the remaining individuals
+- Evenly split the randomly ordered individuals (N=5K) in the remaining dataset
 
 ## 4. Run GWAS
 - Run GWAS in each bin for each phenotype
