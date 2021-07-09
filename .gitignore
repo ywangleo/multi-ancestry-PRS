@@ -47,3 +47,4 @@ gwas/
 scripts/job_reports/
 scripts/qsub.*
 log.*
+*.html

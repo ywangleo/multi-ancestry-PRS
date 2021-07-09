@@ -1,7 +1,7 @@
 # multi-ancestry-PRS
 
 ## 1. Generate plink files using QCd variants
-- maf 0.01, geno 0.05, mind 0.1, hwe 1e-6
+- maf 0.01, geno 0.05, mind 0.1, hwe 1e-6, info 0.3
 
 ## 2. Randomly sample 5K individuals as hold-out dataset for all phenotypes
 - for individuals with non-missing values across all studied phenotypes
