@@ -46,3 +46,4 @@ bins/
 gwas/
 scripts/job_reports/
 scripts/qsub.*
+log.*

@@ -7,9 +7,85 @@
 - for individuals with non-missing values across all studied phenotypes
 - randomly sample 5K individuals
 
+After filling the variables in ```subset5k.sh```, specifically:
+
+Options:
+
+	--phenofile=PHENOFILE
+		Full path to phenotype files with IID or FID/IID included in the headers
+
+	--rel05_list=REL05_LIST
+		Full path to the file listing all unrelated individuals in that specific ancestry (in the order of FID, IID)
+
+	--holdout_file=HOLDOUT_FILE
+		Full path to the file storing hold-out sample ids (FID, IID)
+		
+Then run:
+
+```bash subset5k.sh```
+
+
 ## 3. Split the remaining individuals to bins with equal sample size (5K)
 - Excluding the hold-out samples
 - Evenly split the randomly ordered individuals (N=5K) in the remaining dataset
 
+After filling the variables in ```splitBins.sh```, specifically:
+
+Options:
+
+	--phenofile=PHENOFILE
+		Full path to phenotype files with IID included in the headers
+
+	--all_phenos=ALL_PHENOS
+		a vector of phenotypes, separated by comma
+
+	--rel05_list=REL05_LIST
+		Full path to the file listing all unrelated individuals in that specific ancestry (in the order of FID, IID)
+
+	--holdout=HOLDOUT
+		Full path to the file listing hold-out sample ids (FID, IID)
+
+	--outdir=OUTDIR
+		Full path to the directory of output file storing ids as well as phenotype for each phenotype per bin
+
+	--summary_bins_file=SUMMARY_BINS_FILE
+		Full path to output file summarising number of splitted bins for all phenotypes
+
+		
+Then run:
+
+```bash splitBins.sh```
+
+
 ## 4. Run GWAS
 - Run GWAS in each bin for each phenotype
+
+After filling the variables in ```GWAS.sh```, specifically:
+
+Options:
+
+	--bfile_prefix=BFILE_PREFIX
+		Full path to genoytype files (Here bfile format is used)
+
+	--phenodir=PHENODIR
+		Full path to the directory of phenotype file for each bin generated in splitBins.R
+
+	--pheno=PHENO
+		Phenotype name to run GWAS
+
+	--bin_number=BIN_NUMBER
+		The No. of bin to run GWAS
+
+	--n_threads=N_THREADS
+		Number of threads to run PLINK2
+
+	--summary_bins_file=SUMMARY_BINS_FILE
+		Full path to output file summarising number of splitted bins for all phenotypes
+
+	--out_prefix=OUT_PREFIX
+		Prefix with full path to the output file of GWAS results for each phenotype per bin
+
+		
+Then run:
+
+```bash GWAS.sh```
