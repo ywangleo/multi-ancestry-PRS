@@ -44,3 +44,5 @@ data/
 phenotypes/
 bins/
 gwas/
+scripts/job_reports/
+scripts/qsub.*

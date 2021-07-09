@@ -3,6 +3,7 @@
 phenofile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt"
 eurfile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/ukb31063.neale_gwas_covariates.both_sexes_remove_withdrawn_updateIDs.tsv"
 outf="/scratch/90days/uqywan67/multi-acestry-PRS/bins/ukb_eur_ran5k.idlist"
+hold_out="/scratch/90days/uqywan67/multi-acestry-PRS/bins/ukb_eur_ran5k.idlist"
 
 phenames <- c("height", "bmi", "sbp", "dbp", "wbc", "monocyte", "neutrophil", 
               "eosinophil", "basophil", "lymphocyte", "rbc", "mch", "mcv", 
@@ -12,6 +13,8 @@ library(data.table)
 phes <- fread(phenofile)
 eurs <- fread(eurfile)
 phes1 <- phes[IID %in% eurs$s] ##361144
+holdout <- fread(hold_out, header = F)
+phes1 <- phes1[!IID %in% holdout$V1]
 
 split_data_table <- function(x, no_rows_per_frame, prefix_to_store){
   
@@ -39,8 +42,8 @@ for(PHENO in phenames){
   set.seed(1234)
   tmp2 <- tmp1[sample(nrow(tmp1), nrow(tmp1))]
   #tmp3 <- tmp2[,c("FID", "IID")]
-  #split_data_table(x = tmp2, no_rows_per_frame = 5000, 
-   #                prefix_to_store = paste0("/scratch/90days/uqywan67/multi-acestry-PRS/bins/", PHENO, "_Bin))
+  split_data_table(x = tmp2, no_rows_per_frame = 5000, 
+                   prefix_to_store = paste0("/scratch/90days/uqywan67/multi-acestry-PRS/bins/", PHENO, "_Bin"))
 }
 
 fwrite(sums, file = "/scratch/90days/uqywan67/multi-acestry-PRS/bins/pheno_bins_summary.txt", sep = "\t")
