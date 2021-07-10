@@ -5,7 +5,7 @@ binfile=""
 outdir=""
 bin=""
 
-Rscript 5_merge_GWAS_acrossCHRs.R \
+Rscript merge_GWAS_acrossCHRs.R \
 --gwasdir $gwasdir \
 --out_prefix ${out_prefix} \
 --pheno ${pheno} \
