@@ -33,7 +33,7 @@ bin_sums <- fread(binfile)
 bins <- bin_sums[PHENO == pheno, Bins]
 
 if(bin <= bins){
-  system(paste0("plink2 --bfile ", bfile_prefix, " --pheno ", phenodir, "/", pheno, "_Bin", bin, ".txt --ci 0.95 --linear  --pheno-name ", pheno, " --threads ", n_threads, " --out ", out_prefix, "_", pheno, "_Bin", bin))
+  system(paste0("plink2 --bfile ", bfile_prefix, " --pheno ", phenodir, "/", pheno, "_Bin", bin, ".txt --ci 0.95 --linear --freq --pheno-name ", pheno, " --threads ", n_threads, " --out ", out_prefix, "_", pheno, "_Bin", bin))
 } else{
   print("No such bin file")
 }
