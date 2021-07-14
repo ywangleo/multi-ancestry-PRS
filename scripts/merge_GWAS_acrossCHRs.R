@@ -52,6 +52,8 @@ if(bin <= bins){
     fwrite(gwas, paste0(outdir, "/", pheno, "_Bin", bin, ".glm.linear.gz"))
     
     print(paste0("Finished merging for ", pheno, "_Bin", bin))
+  } else{
+    print("There is no 22 chromosomes")
   }
 } else{
   print("No such bin")

@@ -51,3 +51,4 @@ log.*
 log.md
 scripts/merge_afreq_acrossCHRs.R
 scripts/cal_freq_plink2.R
+README.html
