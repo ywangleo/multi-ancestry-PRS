@@ -47,7 +47,7 @@ gwas/
 scripts/job_reports/
 scripts/qsub.*
 log.*
-*.html
+#*.html
 log.md
 scripts/merge_afreq_acrossCHRs.R
 scripts/cal_freq_plink2.R

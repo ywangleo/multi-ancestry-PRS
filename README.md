@@ -67,7 +67,12 @@ Then run:
 ## 4. Run GWAS
 - Run GWAS in each bin for each phenotype
 
-After filling the variables in ```GWAS.sh```, specifically:
+<br>
+
+> Note the headers of plink2 .glm.linear output have been customized in ```GWAS_customized.sh```, with A1_FREQ included. Whilst, in ```GWAS.sh```, an extra flag *\--freq* is used to report ALT_FREQ and then the .afreq output is further merged with .glm.linear in Step 5.
+
+
+After filling the variables in ```GWAS.sh``` or ```GWAS_customized.sh```, specifically:
 
 Options:
 
@@ -95,15 +100,26 @@ Options:
 		
 Then run:
 
-```bash GWAS.sh```
+```bash GWAS.sh``` or ``` bash GWAS_customized.sh```
+
+
 
 <br>
 
 ## 5. Merge GWAS across chromosomes
 
-In this step, the .afreq and .linear files will be merged into a .linear.gz file.
+In this step:
 
-After filling the variables in ```merge_GWAS_acrossCHRs.sh```:
+- the .afreq and .glm.linear files will be merged into a .linear.gz file in ```merge_GWAS_acrossCHRs.sh```; 
+- the .glm.linear files will be merged into a .linear.gz file in ```merge_GWAS_acrossCHRs_customized.sh```.
+
+<br>
+
+**BETA directions are aligned to ALT alleles with ALT_FREQ added correspondingly given ATL and A1 is not always consistent in plink2 output.**
+
+<br>
+
+After filling the variables in ```merge_GWAS_acrossCHRs.sh``` or ```merge_GWAS_acrossCHRs_customized.sh```:
 
 	--gwasdir=GWASDIR
 		Full path to the directory of GWAS .linear and .afreq outputs per chromosome for each phenotype per bin
@@ -127,9 +143,10 @@ After filling the variables in ```merge_GWAS_acrossCHRs.sh```:
 		Show this help message and exit
 		
 
-Then run `bash ./merge_GWAS_acrossCHRs.sh`. 
+Then run ```bash ./merge_GWAS_acrossCHRs.sh``` or ```merge_GWAS_acrossCHRs_customized.sh```. 
 
-Note for *out_prefix* it is similar to a regex pattern, without the need to specifiy chromosome number, e.g., ```--out_prefix="ukb_eurs_chr```.
+> Note for *out_prefix* it is similar to a regex pattern, without the need to specifiy chromosome number, e.g., ```--out_prefix="ukb_eurs_chr"```.
 
+<br>
 
 
