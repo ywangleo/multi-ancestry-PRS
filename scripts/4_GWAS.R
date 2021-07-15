@@ -1,8 +1,8 @@
 library(data.table)
-genodir="/scratch/90days/uqywan67/multi-acestry-PRS/data/"
-phenodir="/scratch/90days/uqywan67/multi-acestry-PRS/bins/"
-outdir="/scratch/90days/uqywan67/multi-acestry-PRS/gwas/chrs/"
-binfile="/scratch/90days/uqywan67/multi-acestry-PRS/bins/pheno_bins_summary.txt"
+genodir="/scratch/90days/uqywan67/multi-ancestry-PRS/data/"
+phenodir="/scratch/90days/uqywan67/multi-ancestry-PRS/bins/"
+outdir="/scratch/90days/uqywan67/multi-ancestry-PRS/gwas/chrs/"
+binfile="/scratch/90days/uqywan67/multi-ancestry-PRS/bins/pheno_bins_summary.txt"
 
 phenames <- c("height", "bmi", "sbp", "dbp", "wbc", "monocyte", "neutrophil",
               "eosinophil", "basophil", "lymphocyte", "rbc", "mch", "mcv",
