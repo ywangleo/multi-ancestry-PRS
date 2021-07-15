@@ -115,7 +115,7 @@ In this step:
 
 <br>
 
-**BETA directions are aligned to ALT alleles with ALT_FREQ added correspondingly given ATL and A1 is not always consistent in plink2 output.**
+**BETA directions and A1_FREQ are aligned to a given allele lists (SNP A1 A2) from .bim in the whole Biobank in order to harmonize across bins.**
 
 <br>
 
@@ -135,6 +135,9 @@ After filling the variables in ```merge_GWAS_acrossCHRs.sh``` or ```merge_GWAS_a
 
 	--bin_number=BIN_NUMBER
 		The No. of bin to merge GWAS outputs
+
+	--als_list=ALS_LIST
+		Full path and file name to the file listing SNP A1 A2 based on .bim plink file from the whole Biobank, no headers specified
 
 	--out_dir=OUT_DIR
 		Full path to the directory of merged GWAS for each phenotype per bin
