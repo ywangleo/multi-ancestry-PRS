@@ -1,16 +1,16 @@
 ##update phenofile IIDs
-phenofile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/UKB_phenos_ALL17.txt"
+phenofile="/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/UKB_phenos_ALL17.txt"
 
-ids <- fread("/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/ukb_version_idlist.txt")
+ids <- fread("/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/ukb_version_idlist.txt")
 phes <- fread(phenofile)
 phes$eid <- ids[match(phes$eid, ids$BROAD),]$PCTG
 names(phes)[1] <- "IID"
-fwrite(phes, file = "/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt", sep = "\t", na = NA)
+fwrite(phes, file = "/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt", sep = "\t", na = NA)
 
 ##randomly sample 5K individuals as target population
-phenofile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt"
-eurfile="/scratch/90days/uqywan67/multi-acestry-PRS/phenotypes/ukb31063.neale_gwas_covariates.both_sexes_remove_withdrawn_updateIDs.tsv"
-outf="/scratch/90days/uqywan67/multi-acestry-PRS/bins/ukb_eur_ran5k.idlist"
+phenofile="/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/UKB_phenos_ALL17_updateIDs.txt"
+eurfile="/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/ukb31063.neale_gwas_covariates.both_sexes_remove_withdrawn_updateIDs.tsv"
+outf="/scratch/90days/uqywan67/multi-ancestry-PRS/bins/ukb_eur_ran5k.idlist"
 
 library(data.table)
 phes <- fread(phenofile)
