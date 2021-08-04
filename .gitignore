@@ -46,3 +46,7 @@ bins/
 gwas/
 scripts/job_reports/
 scripts/qsub.*
+scripts/meta/
+clump/
+scripts/2011_12_05_metal_script.txt
+meta/
