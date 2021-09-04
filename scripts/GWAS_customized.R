@@ -36,7 +36,7 @@ bins <- bin_sums[PHENO == pheno, Bins]
 
 if(bin <= bins){
   if(covfile != "NULL"){
-    system(paste0("plink2 --bfile ", bfile_prefix, " --pheno ", phenodir, "/", pheno, "_Bin", bin, ".txt --ci 0.95 --glm cols=chrom,pos,ref,alt,a1freq,beta,se,ci,tz,p,nobs --covar ", covfile, " --covar-variance-standardize --freq --pheno-name ", pheno, " --threads ", n_threads, " --out ", out_prefix, "_", pheno, "_Bin", bin))
+    system(paste0("plink2 --bfile ", bfile_prefix, " --pheno ", phenodir, "/", pheno, "_Bin", bin, ".txt --ci 0.95 --glm cols=chrom,pos,ref,alt,a1freq,beta,se,ci,tz,p,nobs hide-covar no-x-sex  --covar ", covfile, " --covar-variance-standardize --freq --pheno-name ", pheno, " --threads ", n_threads, " --out ", out_prefix, "_", pheno, "_Bin", bin))
   } else{
     system(paste0("plink2 --bfile ", bfile_prefix, " --pheno ", phenodir, "/", pheno, "_Bin", bin, ".txt --ci 0.95 --glm cols=chrom,pos,ref,alt,a1freq,beta,se,ci,tz,p,nobs --freq --pheno-name ", pheno, " --threads ", n_threads, " --out ", out_prefix, "_", pheno, "_Bin", bin))
   }
