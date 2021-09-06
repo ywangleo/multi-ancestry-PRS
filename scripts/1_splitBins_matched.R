@@ -83,8 +83,18 @@ for(PHENO in phenames1){
   ##the Count and sampled N in each of the 32 Groups
   sums <- res[,.N, by ="Group"]
   sums[,N_sub := round(N/nrow(res) * 5000)]
-  sums[Group == "2-4-4", N_sub ] ##adjust based on the total sample sizes
-  
+  sums <- sums[order(N_sub)]
+
+  diffs <- sum(sums$N_sub) - 5000
+  if(diffs < 0){
+    sums[(nrow(sums) - abs(diffs) + 1):nrow(sums), N_sub := N_sub + 1]
+  } else if (diffs > 0) {
+    sums[1:abs(diffs), N_sub := N_sub - 1]
+  } else {
+    print(paste0("Sum is now ", sum(sums$N_sub)))
+  }
+
+ 
   
   ### split each Group into number of Bins
   outs <- data.table()
@@ -104,7 +114,10 @@ for(PHENO in phenames1){
     ns <- c("IID", "IID", PHENO)
     out <- outs[i == bin][,..ns]
     names(out) <- c("FID", "IID", PHENO)
-    fwrite(out,  paste0(outdir, "/matched_", PHENO, "_Bin", bin, ".txt"), sep = "\t")
+    if(nrow(out) == 5000){
+    fwrite(out,  paste0(outdir, "/matched_", PHENO, "_Bin", bin, ".txt"), sep = "\t")} else{
+      print("not enough samples")
+    }
   }
 }
 
