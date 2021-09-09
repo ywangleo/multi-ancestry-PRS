@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ###################################################################
-####calculate PRS accuracy metrics for quantitative traits     ####
+####calculate PRS accuracy metrics for disease traits          ####
 ####Ying Wang (yiwang@broadinstitute.org) in June-2021         ####
 ###################################################################
 
@@ -91,35 +91,22 @@ N <-  nrow(prs)
 ##get SCORESUM based on plink version
 scores <- c("SCORESUM", "SCORE1_SUM")
 prs[,SCORESUM := get(grep(paste(scores, collapse = "|"), names(prs), value = T))]
-prs[,ZSCORE := scale(SCORESUM)]
 
-
-if(!is.null(covfile) & !is.null(covs)){
-  exp0 <- paste0( paste0(mycovs, collapse = " + "), paste0(" + ", pcvecs, collapse = "")) # base model with covariates only
-  exp1 <- paste0("ZSCORE + ", paste0(mycovs, collapse = " + "), paste0(" + ", pcvecs, collapse = "")) # full model with PRS
-} else{
-  exp0 <- "1"
-  exp1 <- paste0("ZSCORE")
-}
-
-exp0 <- paste0( paste0(mycovs, collapse = " + ")) # base model with covariates only
-exp1 <- paste0("ZSCORE + ", paste0(mycovs, collapse = " + ")) # full model with PRS
-
-rsq <- function(formula0, formula1, data, indices) {
+rsq <- function(formula, data, indices) {
   d <- data[indices,] # allows boot to select sample 
-  fit0 <- lm(formula0, data = d)
-  fit1 <- lm(formula1, data = d)
-  r2_inc <- summary(fit1)$adj.r.squared - summary(fit0)$adj.r.squared
-  return(r2_inc)
+  fit <- lm(formula, data = d)
+  return(c(summary(fit)$adj.r.squared, summary(fit)$coefficients[8]))
 }
 
-results <- boot(data = prs, statistic = rsq, R = 1000, formula0 = as.formula(paste("PHENO ~ ", exp0)), formula1 = as.formula(paste("PHENO ~ ", exp1)))
+results <- boot(data = prs, statistic = rsq, R = 1000, formula = PHENO ~SCORESUM)
 
-r2 <- results$t0
+r2 <- results$t0[1]
+r2_pval <-  results$t0[2]
+r2_se <- sd(results$t[,1])
 r2_2.5 <- quantile(results$t[,1],c(0.025,0.975))[[1]]
 r2_97.5 <- quantile(results$t[,1],c(0.025,0.975))[[2]]
 
-res <- data.frame(cohort, ldref, pop, prefix, pheno, r2, r2_2.5, r2_97.5)
+res <- data.frame(cohort, ldref, pop, prefix, pheno, r2, r2_se, r2_pval, r2_2.5, r2_97.5)
 
 fwrite(res, file = out, sep = "\t")
 

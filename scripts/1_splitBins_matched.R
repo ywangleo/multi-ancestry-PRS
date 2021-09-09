@@ -59,8 +59,8 @@ for(PHENO in phenames1){
   tmp <- alls[,..nms2]
   tmp1 <- na.omit(tmp)
   Bins <- floor(nrow(tmp1)/5000)
-  counts <- data.table(PHENO, Bins)
-  sums_bin <- rbind(sums_bin, counts)
+  #counts <- data.table(PHENO, Bins)
+  #sums_bin <- rbind(sums_bin, counts)
   
   res <- data.table() ##split age and SES based on quartiles, with a total of 2 * 4 * 4 = 32bins
   for(g1 in 1:2){
@@ -115,7 +115,13 @@ for(PHENO in phenames1){
     out <- outs[i == bin][,..ns]
     names(out) <- c("FID", "IID", PHENO)
     if(nrow(out) == 5000){
-    fwrite(out,  paste0(outdir, "/matched_", PHENO, "_Bin", bin, ".txt"), sep = "\t")} else{
+    	  fwrite(out,  paste0(outdir, "/matched_", PHENO, "_Bin", bin, ".txt"), sep = "\t")} 
+  	  counts <- data.table(PHENO, Bins)
+          sums_bin <- rbind(sums_bin, counts)
+    else{
+        Bins <- Bins - 1
+  	counts <- data.table(PHENO, Bins)
+  	sums_bin <- rbind(sums_bin, counts)
       print("not enough samples")
     }
   }
