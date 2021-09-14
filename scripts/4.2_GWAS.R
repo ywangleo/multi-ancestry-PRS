@@ -3,7 +3,6 @@ genodir="/scratch/90days/uqywan67/multi-ancestry-PRS/data/"
 phenodir="/scratch/90days/uqywan67/multi-ancestry-PRS/bins/"
 outdir="/scratch/90days/uqywan67/multi-ancestry-PRS/gwas/chrs/"
 binfile="/scratch/90days/uqywan67/multi-ancestry-PRS/bins/pheno_bins_summary.txt"
-covfile="/scratch/90days/uqywan67/multi-ancestry-PRS/phenotypes/ukb31063.neale_gwas_covariates.both_sexes_remove_withdrawn_updateIDs.tsv"
 
 phenames <- c("height", "bmi", "sbp", "dbp", "wbc", "monocyte", "neutrophil",
               "eosinophil", "basophil", "lymphocyte", "rbc", "mch", "mcv",
@@ -20,10 +19,8 @@ bins <- bin_sums[PHENO == pheno, Bins]
 
 if(bin <= bins){
   for(chr in 1:22){
-    system(paste0("plink2 --bfile ", genodir, "ukb_eurs_qcs_chr", chr, " --pheno ", phenodir, pheno, "_Bin", bin, ".txt --ci 0.95 --glm cols=chrom,pos,ref,alt,a1freq,beta,se,ci,tz,p,nobs hide-covar  no-x-sex  --vif 1000000 --covar ", covfile, " --covar-variance-standardize --freq --pheno-name ", pheno, " --threads 1 --out ", outdir, "ukb_eurs_", pheno, "_Bin", bin, "_chr", chr))
+  system(paste0("plink2 --bfile ", genodir, "ukb_eurs_qcs_chr", chr, " --pheno ", phenodir, pheno, "_Bin", bin, ".txt --ci 0.95 --linear  --pheno-name ", pheno, " --threads 4 --out ", outdir, "ukb_eurs_", pheno, "_Bin", bin, "_chr", chr))
   }
 } else{
   print("Quit")
 }
-
-
