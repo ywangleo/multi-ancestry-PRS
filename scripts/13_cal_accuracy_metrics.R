@@ -102,9 +102,6 @@ if(!is.null(covfile) & !is.null(covs)){
   exp1 <- paste0("ZSCORE")
 }
 
-exp0 <- paste0( paste0(mycovs, collapse = " + ")) # base model with covariates only
-exp1 <- paste0("ZSCORE + ", paste0(mycovs, collapse = " + ")) # full model with PRS
-
 rsq <- function(formula0, formula1, data, indices) {
   d <- data[indices,] # allows boot to select sample 
   fit0 <- lm(formula0, data = d)
